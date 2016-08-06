@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	int t, n, m, ans, i, j, x;
+	vector<int> dat;
+	cin>>t;
+	while(t--)
+	{
+		dat.clear();
+		ans=0;
+		cin>>n>>m;
+		for(i=0; i<m; i++)
+		{
+			cin>>x;
+			dat.push_back(x);
+		}
+		sort(dat.begin(), dat.end());
+		i=0; j=m-1;
+		while(i<j)
+		{	
+			if(dat[i]==1)
+				ans+=1;
+			else 
+				ans+=2;
+			i++;
+			j--;
+		}
+		
+		cout<<ans<<endl;
+	}
+	return 0;
+}

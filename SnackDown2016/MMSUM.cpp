@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+
+#define FASTIO ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+#define REP(i, n) for(int i=0; i<(n); i++)
+#define REP2(i, a, n) for(int i=(a); i<(n); i++)
+#define pb push_back
+
+using namespace std;
+
+typedef long long ll;
+
+int t, n;
+ll tmp, maxVal, minNum, currNum, currMax;
+vector<ll> dat;
+
+int main()
+{
+    FASTIO
+    cin>>t;
+    while(t--)
+    {
+        dat.clear();
+        cin>>n;
+        REP(i, n)
+        {
+            cin>>tmp;
+            dat.pb(tmp);
+        }
+        maxVal = currMax = 0;
+        minNum = currNum = 0;
+        bool flag = false;
+        REP(i, n)
+        {
+            currMax = currMax + dat[i];
+            currNum = min(currNum, dat[i]);
+            if(currMax < 0)
+            {
+                currNum = currMax = 0;
+            }
+            else if(maxVal < currMax)
+            {
+                flag = true;
+                maxVal = currMax;
+                minNum = min(minNum, currNum);
+            }
+        }
+        if(!flag)
+        {
+            maxVal = dat[0];
+            REP2(i, 1, n)
+                maxVal = max(maxVal, dat[i]);
+        }
+        //cout<<maxVal<<" "<<minNum<<endl;
+        if(maxVal < 0)
+            cout<<maxVal<<endl;
+        else
+            cout<<(maxVal - minNum)<<endl;
+    }
+    return 0;
+}

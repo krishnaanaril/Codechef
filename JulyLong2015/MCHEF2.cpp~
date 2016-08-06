@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define MAX 100005 
+#define INF (1<<20)
+#define gc getchar_unlocked
+
+typedef long long ll;
+typedef pair<int, int> pii;
+
+bool flag;
+int t, n, k, m, l, r, c;
+ll dat[MAX], cost[MAX], dp[MAX][501];
+ll sum;
+
+struct meths
+{
+    int l, r, c;
+};
+
+int read_int(int &x)
+{
+	register int c = gc();
+  x = 0;
+  int neg = 0;
+  for(;((c<48 || c>57) && c != '-');c = gc());
+  if(c=='-') {neg=1;c=gc();}
+  for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+  if(neg) x=-x;
+}
+long long read_long(long long &x)
+{
+	register int c = gc();
+  x = 0;
+  int neg = 0;
+  for(;((c<48 || c>57) && c != '-');c = gc());
+  if(c=='-') {neg=1;c=gc();}
+  for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
+  if(neg) x=-x;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin>>t;
+    while(t--)
+    {        
+        sum=0;
+        flag=true;
+        cin>>n>>k>>m;
+        meths methArr[m];
+        for(int i=0;i<n;i++)
+        {
+            cin>>dat[i];
+            if(dat[i]<0)
+                flag=false;
+            sum+=dat[i];
+            dat[i]=-1*dat[i];
+        }
+        for(int i=0;i<m;i++)
+        {
+            cin>>methArr[i].l>>methArr[i].r>>methArr[i].c;
+        }
+        if(flag)
+            cout<<sum<<endl;
+        else
+        {
+            vector<int> L[n], R[n];
+            set<pii> iset;
+            for(int i=0;i<m;i++)
+            {
+                methArr[i].l--;
+                methArr[i].r--;
+                //cout<<methArr[i].l<<" -> "<<methArr[i].r<<endl;
+                L[methArr[i].l].push_back(i); 
+                R[methArr[i].r].push_back(i);
+            }
+            for(int i=0;i<n;i++)
+            {
+                //cout<<L[i].size()<<" : "<<R[i].size()<<endl;
+                for(int j=0;j<L[i].size();j++)
+                {
+                    iset.insert(pii(methArr[L[i][j]].c, L[i][j]));
+                }
+                if(iset.empty())
+                    cost[i]=INF;
+                else
+                    cost[i]=iset.begin()->first;
+                for(int j=0;j<R[i].size();j++)
+                {
+                    iset.erase(pii(methArr[R[i][j]].c, R[i][j]));
+                }
+                //cout<<cost[i]<<" ";
+                //cout<<dat[i]<<" ";
+            }                     
+            //cout<<endl;
+            for(int i=0; i<=n;i++)
+            {
+                for(int j=0;j<=k;j++)
+                {
+                    if(i==0 || j==0)
+                        dp[i][j]=0;
+                    else if(cost[i-1]<=j)
+                        dp[i][j] = max(dat[i-1]+dp[i-1][j-cost[i-1]], dp[i-1][j]);
+                    else
+                        dp[i][j]=dp[i-1][j];                    
+                }
+            }
+            //cout<<sum<<" : "<<dp[n][k]<<endl; 
+            cout<<(sum+dp[n][k])<<endl;
+        }
+    }
+    return 0;
+}

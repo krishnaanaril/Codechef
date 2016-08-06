@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long double ld;
+
+typedef long long ll;
+typedef pair<int,int>	pii;
+typedef pair<double, double>	pdd;
+typedef vector<int> vi;
+typedef vector<ld> vd;
+typedef pair<ll,ll> pl;
+
+#define FASTIO          ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+#define FOR(i,a,b)		for(int i=(a);i<(b);i++)
+#define REP(i,n)		FOR(i,0,n)
+#define SORT(v)			sort((v).begin(),(v).end())
+#define UN(v)			SORT(v),(v).erase(unique((v).begin(),(v).end()),(v).end())
+#define CL(a,b)			memset(a,b,sizeof a)
+#define pb				push_back
+#define x               first
+#define y               second
+#define EPS             1e-6
+#define M               100005
+#define LIM             1000000005
+
+const int mod = 1000000007;
+
+bitset<M> isPrime;
+bitset<M> isWinning;
+vi primes;
+
+ll solve(ll n)
+{
+    if(n==0)
+        return 0;
+    if(n==1)
+        return 1;
+    map<ll, ll> dat;
+    FOR(i, 2, sqrt(n))
+    {
+        if(n%i == 0)
+        {
+            dat[i]++;
+            while(n%i==0)
+            {
+                n/=i;
+            }
+        }
+        if(n>1)
+            dat[n]++;
+    }
+    map<ll, ll>::iterator it = dat.begin();
+    ll ans = (*it).second;
+    //cout<<(*it).first<<" "<<(*it).second<<endl;
+    it++;
+    for(; it!=dat.end(); it++)
+    {
+        //cout<<(*it).first<<" "<<(*it).second<<endl;
+        ans = ans^(*it).second;
+    }
+    //cout<<endl;
+    return ans;
+}
+
+int t;
+ll n;
+
+int main()
+{
+    FASTIO  
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        ll res = solve(n);
+        if(res != 0 || solve(n-1) ==0)
+            cout<<"Chef"<<endl;
+        else
+            cout<<"Misha"<<endl;
+    }
+    return 0;
+}
