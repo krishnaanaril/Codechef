@@ -102,11 +102,11 @@ int main()
             Got TLE
             visited.reset();
             for(j = i; !visited[j]; visited[j] =1, j= (j+dat[j]+1)%n);*/
-            /*cout<<"i: "<<i<<" - "<<endl;            
+            cout<<"i: "<<i<<" - "<<endl;            
             REP(k, n)
                 cout<<visited[k]<<sendl[k==n-1];
             REP(k, n)
-                cout<<isCycle[k]<<sendl[k==n-1];*/
+                cout<<isCycle[k]<<sendl[k==n-1];
             /*if(j==i)
             {
                 ans++;

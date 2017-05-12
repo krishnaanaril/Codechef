@@ -1,0 +1,6 @@
+5
++ c
++ co
+- code
++ abcdefghijklmnopqrstuvwxya
+- abcdefssghijklmnopqrstuvwxyz
