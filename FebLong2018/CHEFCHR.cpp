@@ -4,7 +4,7 @@
 	Date	: 03/02/2018 09:17:42
 	Author	: Krishna Mohan A M
 	Problem	: https://www.codechef.com/FEB18/problems/CHEFCHR
-	Status	:
+	Status	: Accepted
 */
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
