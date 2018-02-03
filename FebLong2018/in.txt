@@ -1,6 +1,5 @@
-5
-ifchefisgoodforchess
-fehcaskchefechohisvoice
-hecfisaniceperson
-letscallchefthefch
-chooseaprogrammer
+2
+4 4 2 4
+EEOO
+4 2 2 4
+EEOO

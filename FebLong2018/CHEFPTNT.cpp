@@ -3,7 +3,7 @@
 
 	Date	: 03/02/2018 09:51:17
 	Author	: Krishna Mohan A M
-	Problem	:
+	Problem	: https://www.codechef.com/FEB18/problems/CHEFPTNT
 	Status	:
 */
 #include <bits/stdc++.h>
@@ -32,8 +32,51 @@ typedef pair<ll,ll> pll;
 
 const int MOD = 1000000007;
 
+ll t, n, m, k, x, ec, oc;
+string st;
+ll dat[15], cmp;
+
 int main()
 {
       FASTIO
+      cin>>t;
+      while(t--){
+            ec = oc = cmp = 0;
+            REP(i, 15)
+                  dat[i] = 0;
+            cin>>n>>m>>x>>k;
+            cin>>st;
+            assert(st.size()==k);
+            REP(i, k){
+                  if(st[i]=='E')
+                        ec++;
+                  else
+                        oc++;
+            }
+            if(x*m <n || k<n){
+                  cout<<"no\n";
+            }
+            else{
+                  FOR(i, 1, m+1){
+                        if(i&1){
+                              dat[i] = min(oc, x);
+                              oc = max(oc-dat[i], 0LL);
+                        }
+                        else{
+                              dat[i] = min(ec, x);
+                              ec  = max(ec-dat[i], 0LL);
+                        }
+                        cmp += dat[i];
+                        // cout<<dat[i]<<" ";
+                  }
+                  // cout<<"\n";
+                  if(cmp >= n){
+                        cout<<"yes\n";
+                  }
+                  else{
+                        cout<<"no\n";
+                  }
+            }
+      }
       return 0;
 }
