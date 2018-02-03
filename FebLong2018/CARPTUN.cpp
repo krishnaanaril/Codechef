@@ -1,9 +1,9 @@
 /*
 	Swamy Saranam
 
-	Date	: 03/02/2018 10:30:12
+	Date	: 03/02/2018 11:27:44
 	Author	: Krishna Mohan A M
-	Problem	: https://www.codechef.com/FEB18/problems/CARPTUN
+	Problem	:
 	Status	:
 */
 #include <bits/stdc++.h>
@@ -34,8 +34,7 @@ const int MOD = 1000000007;
 const int N = 1e5+5;
 
 double carA[N][2], carB[N][2], s, tt, ans;
-double c, d, delay[N];
-ll t, n;
+ll t, c, d, delay[N], n;
 
 int main()
 {
@@ -43,37 +42,14 @@ int main()
       cin>>t;
       while(t--){
             cin>>n;
+            ans = 0;
             REP(i, n){
                   cin>>delay[i];
             }
             cin>>c>>d>>s;
-            tt = d/s;
             REP(i, n){
-                  if(i==0){
-                        carA[i][0] = 0;
-                        carA[i][1] = delay[i];
-                  }
-                  else{
-                        carA[i][0] = carA[i-1][1]+tt;
-                        carA[i][1] = carA[i][0]+delay[i];
-                  }
-                  cout<<carA[i][0]<<" : "<<carA[i][1]<<"\n";
-            }
-            cout<<"\n";
-            REP(i, n){
-                  if(i==0){
-                        carB[i][0] = 0;
-                        carB[i][1] = c*delay[i];
-                  }
-                  else{
-                        carB[i][0] = carB[i-1][1]+tt;
-                        carB[i][1] = max(carB[i][0], carA[i][0]+((c-1)*delay[i]))+delay[i];
-                  }
-                  cout<<carB[i][0]<<" : "<<carB[i][1]<<"\n";
-            }
-            cout<<"\n";
-            assert(carB[n-1][1]>carA[n-1][1]);
-            ans = carB[n-1][1] - carA[n-1][1];
+                  ans = max(ans, (double)(c-1)*delay[i]);
+            }            
             cout<<fixed<<setprecision(10)<<ans<<"\n";
       }
       return 0;
