@@ -2,4 +2,4 @@
 
 * Chef and his characters
 
-      Traverse the string from left to right and sort each of the 4 consecutive characters. Compare it with the sorted word "chef", if matches increment the count.
+Traverse the string from left to right and sort each of the 4 consecutive characters. Compare it with the sorted word "chef", if matches increment the count.
